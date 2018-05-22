@@ -1,0 +1,19 @@
+[package]
+name = "r0ket-l0dable"
+version = "0.0.0"
+authors = ["Astro <astro@spaceboyz.net>"]
+categories = ["embedded", "hardware-support", "no-std"]
+description = "Build l0dable apps for the CCCamp2011 r0ket badge"
+documentation = "https://docs.rs/r0ket-l0dable"
+keywords = ["arm", "cortex-m", "nxp", "ccc", "embedded-hal"]
+license = "Apache-2.0"
+repository = "https://github.com/astro/rust-r0ket"
+
+[dependencies]
+r0 = "0.2.2"
+lpc13xx = "0.0.0"
+embedded-hal = "0.2.1"
+
+[profile.release]
+debug = 2
+lto = true
