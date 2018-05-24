@@ -54,3 +54,5 @@ pub mod time;
 pub mod rand;
 /// Power supply information
 pub mod power;
+/// nRF24l01 radio communications
+pub mod nrf;
