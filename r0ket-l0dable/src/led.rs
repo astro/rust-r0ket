@@ -18,6 +18,7 @@ macro_rules! def_gpio_setter {
 def_gpio_setter!(set_gpio0, GPIO0);
 def_gpio_setter!(set_gpio1, GPIO1);
 
+/// Set/clear one of the four LEDs.
 pub fn set_led(n: usize, set: bool) {
     let p = unsafe { Peripherals::steal() };
     match n & 3 {

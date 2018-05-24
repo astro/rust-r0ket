@@ -1,5 +1,5 @@
 /// Firmware call table linked to `0x0000_0124`
-#[allow(non_snake_case)]
+#[allow(non_snake_case, missing_docs)]
 #[repr(C)]
 pub struct Table {
     pub DoChar: extern "C" fn(isize, isize, isize) -> isize,
@@ -138,6 +138,7 @@ extern "C" {
     static TheTable: Table;
 }
 
+/// Return safe pointer to `TheTable`
 pub fn table() -> &'static Table {
     unsafe {
         &TheTable

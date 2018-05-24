@@ -32,16 +32,25 @@
 //! arm-none-eabi-objcopy -O binary --strip-unneeded target/thumbv7m-none-eabi/release/demo demo.c0d
 //! ```
 #![no_std]
+#![deny(missing_docs)]
 
 extern crate lpc13xx as target;
 extern crate r0;
 extern crate embedded_hal as hal;
 
+/// l0dable startup
 pub mod startup;
+/// Calling firmware functions
 pub mod table;
+/// Display
 pub mod lcd;
+/// Joystick
 pub mod input;
+/// Blinking LEDs
 pub mod led;
+/// Time functions
 pub mod time;
+/// `getRandom`
 pub mod rand;
+/// Power supply information
 pub mod power;

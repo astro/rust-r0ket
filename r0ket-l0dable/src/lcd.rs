@@ -3,7 +3,9 @@ use core::fmt;
 
 use table::table;
 
+/// Display width in pixels
 pub const RESX: usize = 96;
+/// Display height in pixels
 pub const RESY: usize = 68;
 /// `RESY` in bytes
 pub const RESY_B: usize = 9;
@@ -53,6 +55,7 @@ pub fn println(s: &str) {
     (table().lcdPrintln)(buf.as_ptr());
 }
 
+/// Writes onto the display
 pub struct Stdout;
 /// Do not use as of now. Linking in such functionality makes the l0dable exceed 2560 bytes.
 pub const STDOUT: Stdout = Stdout;
@@ -72,10 +75,12 @@ impl fmt::Write for Stdout {
     }
 }
 
+/// Clear the display buffer
 pub fn clear() {
     (table().lcdClear)();
 }
 
+/// Flush the display buffer to hardware
 pub fn display() {
     (table().lcdDisplay)();
 }
