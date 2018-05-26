@@ -44,12 +44,13 @@ pub fn do_string(sx: isize, sy: isize, s: &str) {
 fn with_nul_terminated_bufs<F>(s: &str, mut f: F)
     where F: FnMut(*const u8, bool)
 {
-    let mut bytes = &s.as_bytes().as_ref()[..];
+    let mut bytes = s.as_bytes();
     while bytes.len() > 0 {
         let mut buf = [0u8; 16];
-        let len = s.len().min(buf.len() - 1);
-        buf[0..len].copy_from_slice(&bytes[..len]);
-        f(buf.as_ptr(), bytes.len() < 1);
+        let len = bytes.len().min(buf.len() - 1);
+        buf[..len].copy_from_slice(&bytes[..len]);
+        f(buf.as_ptr(), len == bytes.len());
+        drop(buf);
 
         bytes = &bytes[len..];
     }
@@ -72,9 +73,9 @@ pub fn print(s: &str) {
 pub fn println(s: &str) {
     with_nul_terminated_bufs(s, |ptr, is_last| {
         if is_last {
-            (table().lcdPrint)(ptr);
-        } else {
             (table().lcdPrintln)(ptr);
+        } else {
+            (table().lcdPrint)(ptr);
         }
     });
 }
