@@ -69,7 +69,7 @@ impl Rx {
         let len = (table().nrf_rcv_pkt_poll)(maxsize as isize, ptr);
         match len {
             _ if len > 0 && len <= maxsize as isize =>
-                Ok(Payload::new(len as usize, buf)),
+                Ok(Payload::new(len as u8, buf)),
             0 => Err(RxError::WouldBlock),
             -1 => Err(RxError::Invalid),
             -2 => Err(RxError::NoPacket),
@@ -81,18 +81,23 @@ impl Rx {
 /// Packet payload up to 32 bytes
 pub struct Payload {
     buf: [u8; 32],
-    len: usize,
+    len: u8,
 }
 
 impl Payload {
     /// Create packet from 32 bytes buffer and a length
-    pub fn new(len: usize, buf: [u8; 32]) -> Self {
+    pub fn new(len: u8, buf: [u8; 32]) -> Self {
         Payload { buf, len }
+    }
+
+    /// Payload length
+    pub fn len(&self) -> usize {
+        self.len.into()
     }
 }
 
 impl AsRef<[u8]> for Payload {
     fn as_ref(&self) -> &[u8] {
-        &self.buf[0..self.len]
+        &self.buf[0..self.len()]
     }
 }
