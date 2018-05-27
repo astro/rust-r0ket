@@ -1,6 +1,5 @@
 MEMORY
 {
-    /* sram(rwx): ORIGIN = 0x10002000 - 2560, LENGTH = 2560 */
     sram(rwx): ORIGIN = 0x10002000 - 2560, LENGTH = 2560
 }
 
