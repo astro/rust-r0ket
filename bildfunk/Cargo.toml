@@ -1,0 +1,15 @@
+[package]
+name = "bildfunk"
+version = "0.1.0"
+authors = ["Astro <astro@spaceboyz.net>"]
+
+[dependencies]
+cortex-m = { version = "0.5.2", features = ["inline-asm"] }
+r0ket-l0dable = { path = "../r0ket-l0dable" }
+lpc13xx = "0.0.0"
+panic-abort = "0.1.1"
+embedded-hal = "0.2.1"
+
+[profile.release]
+debug = 2
+lto = true
